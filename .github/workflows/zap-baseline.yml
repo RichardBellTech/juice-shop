@@ -54,6 +54,19 @@ jobs:
           docker logs juice-shop
           exit 1
 
+      - name: Collect response headers for manual review
+        run: |
+          echo "CHECK 1: Root response headers"
+          curl --silent --show-error --fail \
+            --dump-header - --output /dev/null \
+            "$TARGET_URL/"
+
+          echo "CHECK 2: Root response with an unrelated Origin"
+          curl --silent --show-error --fail \
+            --dump-header - --output /dev/null \
+            -H "Origin: https://example.invalid" \
+            "$TARGET_URL/"
+            
       - name: Run ZAP baseline
         uses: zaproxy/action-baseline@v0.14.0
         with:
