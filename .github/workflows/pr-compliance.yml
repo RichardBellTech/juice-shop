@@ -10,8 +10,9 @@ permissions:
 
 jobs:
   check-compliance:
-    runs-on: ubuntu-latest
-    steps:
+   if: github.repository == 'juice-shop/juice-shop'
+   runs-on: ubuntu-latest
+   steps:
       - name: "Initialize PR Information"
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd #v8.0.0
         id: init
