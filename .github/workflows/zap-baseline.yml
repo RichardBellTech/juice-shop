@@ -60,6 +60,7 @@ jobs:
           target: ${{ env.TARGET_URL }}
           rules_file_name: .zap/rules.tsv
           cmd_options: >-
+            -c .zap/rules.tsv
             -a -m ${{ inputs.spider_minutes || '2' }} -T 10
           fail_action: ${{ inputs.enforce_gate || false }}
           allow_issue_writing: false
